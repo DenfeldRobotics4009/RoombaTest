@@ -1,0 +1,5 @@
+git add .
+git commit -m "What u did"
+git pull origin
+ --- FIX THE ERRORS -- 
+git push origin
