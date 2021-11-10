@@ -8,8 +8,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import java.lang.Math;
 
 public class DriveTrain extends SubsystemBase {
+  public double Xposition=0, Yposition=0;
+  public double distance=0, gyro=0;
   
   TalonFX left1 = new TalonFX(0);
   TalonFX left2 = new TalonFX(2);
@@ -28,6 +31,13 @@ public class DriveTrain extends SubsystemBase {
 
   @Override
   public void periodic() {
+    Xposition = distance*(
+      Math.toDegrees(
+        Math.sin(
+          Math.toRadians(gyro)
+        )
+      )
+    );
     // This method will be called once per scheduler run
   }
 }
