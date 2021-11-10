@@ -20,10 +20,10 @@ public class DriveTrain extends SubsystemBase {
   public DriveTrain() {}
 
   public void drive(double joystickY, double joystickZ){
-    left1.set(ControlMode.PercentOutput, joystickY+joystickZ);
-    left2.set(ControlMode.PercentOutput, joystickY+joystickZ);
-    right1.set(ControlMode.PercentOutput, -(joystickY-joystickZ));
-    right2.set(ControlMode.PercentOutput, -(joystickY-joystickZ));
+    left1.set(ControlMode.PercentOutput, -(joystickY-joystickZ));
+    left2.set(ControlMode.PercentOutput, -(joystickY-joystickZ));
+    right1.set(ControlMode.PercentOutput, (joystickY+joystickZ));
+    right2.set(ControlMode.PercentOutput, (joystickY+joystickZ));
   } 
 
   @Override
