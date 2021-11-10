@@ -38,6 +38,13 @@ public class DriveTrain extends SubsystemBase {
         )
       )
     );
+    Yposition = distance*(
+      Math.toDegrees(
+        Math.cos(
+          Math.toRadians(gyro)
+        )
+       )
+    );
     // This method will be called once per scheduler run
   }
 }
