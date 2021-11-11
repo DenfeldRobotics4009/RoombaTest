@@ -28,7 +28,7 @@ public class DriveTrain extends SubsystemBase {
     left1.set(ControlMode.PercentOutput, -(joystickY-joystickZ));
     left2.set(ControlMode.PercentOutput, -(joystickY-joystickZ));
       talonSpeeds[0] = -(joystickY-joystickZ);
-      
+
     right1.set(ControlMode.PercentOutput, (joystickY+joystickZ));
     right2.set(ControlMode.PercentOutput, (joystickY+joystickZ));
       talonSpeeds[1] = (joystickY+joystickZ);
@@ -43,8 +43,5 @@ public class DriveTrain extends SubsystemBase {
         )
       )
     );
-    
-
-    
   }
 }

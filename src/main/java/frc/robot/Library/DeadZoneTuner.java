@@ -1,4 +1,4 @@
-package frc.robot.Libraries;
+package frc.robot.Library;
 
 public class DeadZoneTuner{
     
