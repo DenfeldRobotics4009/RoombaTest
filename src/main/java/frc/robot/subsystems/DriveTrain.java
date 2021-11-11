@@ -13,6 +13,8 @@ import java.lang.Math;
 public class DriveTrain extends SubsystemBase {
   public double Xposition=0, Yposition=0;
   public double distance=0, gyro=0;
+
+  public double[] talonSpeeds = {0,0};
   
   TalonFX left1 = new TalonFX(0);
   TalonFX left2 = new TalonFX(2);
@@ -25,8 +27,11 @@ public class DriveTrain extends SubsystemBase {
   public void drive(double joystickY, double joystickZ){
     left1.set(ControlMode.PercentOutput, -(joystickY-joystickZ));
     left2.set(ControlMode.PercentOutput, -(joystickY-joystickZ));
+      talonSpeeds[0] = -(joystickY-joystickZ);
+      
     right1.set(ControlMode.PercentOutput, (joystickY+joystickZ));
     right2.set(ControlMode.PercentOutput, (joystickY+joystickZ));
+      talonSpeeds[1] = (joystickY+joystickZ);
   } 
 
   @Override
@@ -38,6 +43,8 @@ public class DriveTrain extends SubsystemBase {
         )
       )
     );
-    // This method will be called once per scheduler run
+    
+
+    
   }
 }
