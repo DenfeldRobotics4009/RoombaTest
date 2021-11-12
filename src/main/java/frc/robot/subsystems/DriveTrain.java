@@ -4,25 +4,38 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.kauailabs.navx.frc.AHRS;
 import java.lang.Math;
 
 public class DriveTrain extends SubsystemBase {
-  public double Xposition=0, Yposition=0;
-  public double distance=0, gyro=0;
+  double Xposition=0, Yposition=0;
+  double distance=0, gyroAngle=0;
 
-  public double[] talonSpeeds = {0,0};
+  double previousDistance = 0;
+  double frameDistance = 0;
+  
+  double[] talonSpeeds = {0,0};
   
   TalonFX left1 = new TalonFX(0);
   TalonFX left2 = new TalonFX(2);
   TalonFX right1 = new TalonFX(1);
   TalonFX right2 = new TalonFX(3);
 
+  AHRS gyro = new AHRS();
+
   /** Creates a new DriveTrain. */
-  public DriveTrain() {}
+  public DriveTrain() {
+    Shuffleboard.getTab("Position").addNumber("Xposition", () -> Xposition);
+    Shuffleboard.getTab("Position").addNumber("Yposition", () -> Yposition);
+    Shuffleboard.getTab("Position").addNumber("Gyro Angle", () -> gyroAngle);
+    Shuffleboard.getTab("Position").addNumber("Frame Distance", () -> frameDistance);
+    Shuffleboard.getTab("Position").addNumber("Previous Distance", () -> previousDistance);
+  }
 
   public void drive(double joystickY, double joystickZ){
     left1.set(ControlMode.PercentOutput, -(joystickY-joystickZ));
@@ -36,12 +49,35 @@ public class DriveTrain extends SubsystemBase {
 
   @Override
   public void periodic() {
-    Xposition = distance*(
+
+    gyroAngle = gyro.getAngle();
+
+    double currentDistance = (
+        left1.getSelectedSensorPosition() + right1.getSelectedSensorPosition() 
+        + 
+        left2.getSelectedSensorPosition() + right2.getSelectedSensorPosition()
+      ) / 2;
+
+    double currentDelta = currentDistance - previousDistance;
+    frameDistance = currentDelta;
+
+    // Calculating positions
+    Xposition += currentDelta*(
       Math.toDegrees(
         Math.sin(
-          Math.toRadians(gyro)
+          Math.toRadians(gyroAngle)
         )
       )
     );
+  
+    Yposition += currentDelta*(
+      Math.toDegrees(
+        Math.cos(
+          Math.toRadians(gyroAngle)
+        )
+      )
+    );  
+
+    previousDistance = currentDistance;
   }
 }
