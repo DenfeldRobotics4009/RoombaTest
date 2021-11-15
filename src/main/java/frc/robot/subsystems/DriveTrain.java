@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
@@ -52,11 +53,11 @@ public class DriveTrain extends SubsystemBase {
 
     gyroAngle = gyro.getAngle();
 
-    double currentDistance = (
+    double currentDistance =( (
         left1.getSelectedSensorPosition() + right1.getSelectedSensorPosition() 
         + 
         left2.getSelectedSensorPosition() + right2.getSelectedSensorPosition()
-      ) / 2;
+      ) / 2)/Constants.EncoderValueScale ;
 
     double currentDelta = currentDistance - previousDistance;
     frameDistance = currentDelta;
@@ -80,4 +81,6 @@ public class DriveTrain extends SubsystemBase {
 
     previousDistance = currentDistance;
   }
+
+  // TODO Create functions for making the robot drive to certain coordinates
 }
