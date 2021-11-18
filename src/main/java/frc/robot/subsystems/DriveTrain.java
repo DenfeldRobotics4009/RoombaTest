@@ -14,6 +14,7 @@ import com.kauailabs.navx.frc.AHRS;
 import java.lang.Math;
 
 public class DriveTrain extends SubsystemBase {
+
   double Xposition=0, Yposition=0;
   double distance=0, gyroAngle=0;
 
@@ -80,6 +81,36 @@ public class DriveTrain extends SubsystemBase {
     );  
 
     previousDistance = currentDistance;
+  }
+  /**
+   * This function returns the child vector as relative
+   * to the parent vector
+   * @param Ax X position of parent vector
+   * @param Ay Y position of parent vector
+   * @param Bx X position child vector
+   * @param By Y position child vector
+   * @param theta Gyro value of the robot
+   */
+  private void findRelativePoints(double Ax, double Ay,double Bx,double By,double theta){
+    double s = Math.sqrt(
+      ((Bx-Ax)*(Bx-Ax)) +
+      ((By-Ay)*(By-Ay))
+    );
+  
+    double o = Math.atan(
+      (Bx-Ax)/(By-Ax)
+    );
+
+    double n = Math.cos(
+      90 - o
+    );
+
+    double X = Math.sqrt(
+      (s*s)
+      -((n-theta)*(n-theta))
+    );
+    
+    // TODO double Y = 
   }
 
   // TODO Create functions for making the robot drive to certain coordinates
