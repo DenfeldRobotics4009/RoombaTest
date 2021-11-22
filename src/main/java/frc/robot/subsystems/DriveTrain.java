@@ -91,7 +91,7 @@ public class DriveTrain extends SubsystemBase {
    * @param By Y position child vector
    * @param theta Gyro value of the robot
    */
-  private double[] findRelativePoints(double Ax, double Ay,double Bx,double By,double theta){
+  public double[] findRelativePoints(double Ax, double Ay,double Bx,double By,double theta){
     double[] out = {0,0};
     
     double s = Math.sqrt(
@@ -119,7 +119,7 @@ public class DriveTrain extends SubsystemBase {
     return out;
   }
 
-  private double[] Ratio(double x, double y, double width) {
+  public double[] Ratio(double x, double y, double width) {
     double[] out = {0.0,0.0};
     double px = 0, py = 0;
     px = (1/2)*(x);
@@ -129,6 +129,8 @@ public class DriveTrain extends SubsystemBase {
     out[1] = c+(1/2)*width;
     return out;
   }
+
+
 
   // TODO Create functions for making the robot drive to certain coordinates
 }
