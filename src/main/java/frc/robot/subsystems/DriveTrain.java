@@ -110,7 +110,9 @@ public class DriveTrain extends SubsystemBase {
       -((n-theta)*(n-theta))
     );
     
-    // TODO double Y = 
+    double Y = Math.sqrt(
+      (s*s) + (X*X)
+    );
   }
 
   // TODO Create functions for making the robot drive to certain coordinates
