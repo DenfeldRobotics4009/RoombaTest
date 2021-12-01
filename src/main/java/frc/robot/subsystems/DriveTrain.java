@@ -15,7 +15,7 @@ import java.lang.Math;
 
 public class DriveTrain extends SubsystemBase {
 
-  double Xposition=0, Yposition=0;
+  public double Xposition=0, Yposition=0;
   double distance=0, gyroAngle=0;
 
   double previousDistance = 0;
@@ -48,6 +48,13 @@ public class DriveTrain extends SubsystemBase {
     right2.set(ControlMode.PercentOutput, (joystickY+joystickZ));
       talonSpeeds[1] = (joystickY+joystickZ);
   } 
+
+  public void drive(double[] speeds){
+    left1.set(ControlMode.PercentOutput, speeds[0]);
+    left2.set(ControlMode.PercentOutput, speeds[0]);
+    right1.set(ControlMode.PercentOutput, speeds[1]);
+    right2.set(ControlMode.PercentOutput, speeds[1]);
+  }
 
   @Override
   public void periodic() {
@@ -132,10 +139,10 @@ public class DriveTrain extends SubsystemBase {
     return Ratio(rPoints(Xposition, Yposition, goalX, goalY, gyroAngle), 6.8);
   }
 
-  public double[] DistanceFromPoint(double Ax, double Ay, double Bx, double By) {
+  public double DistanceFromPoint(double Ax, double Ay, double Bx, double By) {
     double[] out = {0,0};
     out[0] = Math.abs(Bx - Ax);
     out[1] = Math.abs(By - Ay); // Ayo da pizza here
-    return out;
+    return Math.sqrt((out[0]*out[0])+(out[1]+out[1]));
   } 
 }

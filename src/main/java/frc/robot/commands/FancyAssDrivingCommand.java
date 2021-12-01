@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import com.fasterxml.jackson.databind.ser.std.StdArraySerializers.DoubleArraySerializer;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
@@ -11,13 +13,8 @@ public class FancyAssDrivingCommand extends CommandBase {
   private DriveTrain Drive;
   /** Creates a new FancyAssDrivingCommand. */
   public FancyAssDrivingCommand(DriveTrain drive) {
-<<<<<<< HEAD
-    Drive=drive;
-    addRequirements(drive);
-=======
-    Drive=drive;  
+    Drive = drive;  
     addRequirements(Drive);
->>>>>>> 485e478a3b01dabb5759845ecaba09f94f691e09
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -27,7 +24,14 @@ public class FancyAssDrivingCommand extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+
+    double[] DrivingSpeeds = Drive.RobotDrivingRatio(10, 10); 
+
+    if ((Drive.DistanceFromPoint(Drive.Xposition, Drive.Yposition, 10.0, 10.0)) > 2){
+      Drive.drive(DrivingSpeeds);  
+    }
+  }
 
   // Called once the command ends or is interrupted.
   @Override
