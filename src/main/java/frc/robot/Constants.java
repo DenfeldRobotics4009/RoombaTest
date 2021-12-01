@@ -15,6 +15,6 @@ package frc.robot;
 public final class Constants {
     public static final int EncoderValueScale = 4800;
     public final int VoltageToRPMScale = 6380;
-
+    public final double EncoderToInch = 3.8; 
     
 }
