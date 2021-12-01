@@ -11,8 +11,13 @@ public class FancyAssDrivingCommand extends CommandBase {
   private DriveTrain Drive;
   /** Creates a new FancyAssDrivingCommand. */
   public FancyAssDrivingCommand(DriveTrain drive) {
+<<<<<<< HEAD
     Drive=drive;
     addRequirements(drive);
+=======
+    Drive=drive;  
+    addRequirements(Drive);
+>>>>>>> 485e478a3b01dabb5759845ecaba09f94f691e09
     // Use addRequirements() here to declare subsystem dependencies.
   }
 

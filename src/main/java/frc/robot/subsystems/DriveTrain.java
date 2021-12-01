@@ -129,7 +129,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double[] RobotDrivingRatio(double goalX, double goalY) { // TODO ITS NOT 10 BUT WHATEVER
-    return Ratio(rPoints(Xposition, Yposition, goalX, goalY, gyroAngle), 10.0);
+    return Ratio(rPoints(Xposition, Yposition, goalX, goalY, gyroAngle), 6.8);
   }
 
   public double[] DistanceFromPoint(double Ax, double Ay, double Bx, double By) {
